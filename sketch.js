@@ -7,14 +7,9 @@ var story, storyImg
 var portal, portalImg
 var astro, astroImg
 var button, buttonImg, goal, goalImg
+var race, raceImg, ship, shipImg
+var GameState = start;
 
-var gameState = 0;
-var playerCount;
-var allPlayers;
-var distance = 0;
-var database;
-
-var form, player, game;
 
 
 function preload(){
@@ -32,11 +27,14 @@ portalImg = loadImage("portal2.png")
 astroImg = loadImage("astro.png")
 buttonImg = loadImage("button.png")
 goalImg = loadImage("goal.png")
+raceImg = loadImage("race.png")
+shipImg = loadImage("ship.png")
 }
 
 function setup(){
 createCanvas(displayWidth, displayHeight-200)   
-    
+   
+
 
 fill("white")
 VI = createSprite(displayWidth/2-200, -20, 50, 50)
@@ -80,11 +78,17 @@ button.visible = false
 
 goal = createSprite(400, -200, 20,20)
 goal.addAnimation("goal", goalImg)
+
+race = createSprite(600, 200, 10, 10)
+race.addAnimation("poster", raceImg)
+
+ship = createSprite(600, 400, 10, 10)
+ship.addAnimation("spaceship", shipImg)
 }
 
 function draw(){
    background(space) 
- 
+  
 
    VI.display()
    HA.display()
@@ -96,9 +100,7 @@ function draw(){
    story.display()
    portal.display()
  
-   if(keyDown("s")){
-gameState = "start"
-   }
+  
 
    if(VI.y>300){
    stone2.velocityX = -14
@@ -138,6 +140,7 @@ if(portal.isTouching(story)){
 }
 if(portal.y<= -10){
 background(space2)
+goal.display()
 astro.velocityX = 6
 astro.lifetime = 200
 textSize(25)
@@ -149,33 +152,31 @@ text("YOU HELP YOUR FRIENDS UP AND SEE YOURSELF IN SPACE SUITS!AND THERE ARE SPA
 if(astro.x>1400){
 goal.velocityY = 5
  goal.lifetime = 100
+
 text("A MESSAGE APPEARS IN FRONT OF YOU AND SAYS;'WELCOME TO THE SPACE RACE.'", 10, 400)
-text("YOU HAVE TO PROTECT THE PLANETS FROM INVASIONS", 10, 430)
-text("YOU AND YOUR FRIENDS ARE EXCITED TO SEE THIS AND THINK IT IS A GAME..", 10, 460)
-text("BUT LITTLE DO YOU KNOW THAT THIS IS NOT A GAME", 10, 490)
+text("'BE THE SAVIOUR OF THE PLANETS!'", 10, 430)
+//text("YOU AND YOUR FRIENDS ARE EXCITED TO SEE THIS AND THINK IT IS A GAME..", 10, 460)
+//text("BUT LITTLE DO YOU KNOW THAT THIS IS NOT A GAME", 10, 490)
 }
 
-
-
-if(portal.y<= 600){
-  textSize(25)
-  text("IN THE FULL MOON EVE YOU ARE AT THE MARS GAMING CENTER AND ARE PLAYING WITH YOUR FRIENDS. ", 10, 130)    
-text("SUDDENLY A PORTAL APPEARS AND SUCKS YOU GUYS IN", 10, 160)
-}
 
 if(create.x>displayWidth+50){
  textSize(25)
-    text("MARS, 2070...EARTH IS NO MORE A PLACE FOR LIVING. IT'S BECOME A PLACE ONLY FOR MATERIALS.", 10, 100)
+    text("MARS, 2070...EARTH IS NO MORE A PLACE FOR LIVING. IT'S BECOME A PLACE ONLY FOR RESEARCH.", 10, 100)
 
 }
 if(goal.y>1350){
     background(space3)
+ race.display()
+ ship.display()
     }
+
+
 
 
 astro.display()
 button.display()
-goal.display()
+
 
 
 }
